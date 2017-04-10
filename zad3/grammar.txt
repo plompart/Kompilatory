@@ -1,0 +1,78 @@
+Rule 0     S' -> program
+Rule 1     program -> anything_list
+Rule 2     anything_list -> anything_list anything
+Rule 3     anything_list -> <empty>
+Rule 4     anything -> declarations
+Rule 5     anything -> fundef
+Rule 6     anything -> instruction
+Rule 7     declarations -> declarations declaration
+Rule 8     declarations -> declaration
+Rule 9     declaration -> TYPE inits ;
+Rule 10    declaration -> error ;
+Rule 11    inits -> inits , init
+Rule 12    inits -> init
+Rule 13    init -> ID = expression
+Rule 14    instruction -> print_instr
+Rule 15    instruction -> labeled_instr
+Rule 16    instruction -> assignment
+Rule 17    instruction -> choice_instr
+Rule 18    instruction -> while_instr
+Rule 19    instruction -> repeat_instr
+Rule 20    instruction -> return_instr
+Rule 21    instruction -> break_instr
+Rule 22    instruction -> continue_instr
+Rule 23    instruction -> compound_instr
+Rule 24    instruction -> expression ;
+Rule 25    print_instr -> PRINT expr_list ;
+Rule 26    print_instr -> PRINT error ;
+Rule 27    labeled_instr -> ID : instruction
+Rule 28    assignment -> ID = expression ;
+Rule 29    choice_instr -> IF ( condition ) instruction
+Rule 30    choice_instr -> IF ( condition ) instruction ELSE instruction
+Rule 31    choice_instr -> IF ( error ) instruction
+Rule 32    choice_instr -> IF ( error ) instruction ELSE instruction
+Rule 33    while_instr -> WHILE ( condition ) instruction
+Rule 34    while_instr -> WHILE ( error ) instruction
+Rule 35    repeat_instr -> REPEAT anything_list UNTIL condition ;
+Rule 36    return_instr -> RETURN expression ;
+Rule 37    continue_instr -> CONTINUE ;
+Rule 38    break_instr -> BREAK ;
+Rule 39    compound_instr -> { anything_list }
+Rule 40    condition -> expression
+Rule 41    const -> INTEGER
+Rule 42    const -> FLOAT
+Rule 43    const -> STRING
+Rule 44    expression -> const
+Rule 45    expression -> ID
+Rule 46    expression -> expression + expression
+Rule 47    expression -> expression - expression
+Rule 48    expression -> expression * expression
+Rule 49    expression -> expression / expression
+Rule 50    expression -> expression % expression
+Rule 51    expression -> expression | expression
+Rule 52    expression -> expression & expression
+Rule 53    expression -> expression ^ expression
+Rule 54    expression -> expression AND expression
+Rule 55    expression -> expression OR expression
+Rule 56    expression -> expression SHL expression
+Rule 57    expression -> expression SHR expression
+Rule 58    expression -> expression EQ expression
+Rule 59    expression -> expression NEQ expression
+Rule 60    expression -> expression > expression
+Rule 61    expression -> expression < expression
+Rule 62    expression -> expression LE expression
+Rule 63    expression -> expression GE expression
+Rule 64    expression -> ( expression )
+Rule 65    expression -> ( error )
+Rule 66    expression -> ID ( expr_list_or_empty )
+Rule 67    expression -> ID ( error )
+Rule 68    expr_list_or_empty -> expr_list
+Rule 69    expr_list_or_empty -> <empty>
+Rule 70    expr_list -> expr_list , expression
+Rule 71    expr_list -> expression
+Rule 72    fundef -> TYPE ID ( args_list_or_empty ) compound_instr
+Rule 73    args_list_or_empty -> args_list
+Rule 74    args_list_or_empty -> <empty>
+Rule 75    args_list -> args_list , arg
+Rule 76    args_list -> arg
+Rule 77    arg -> TYPE ID
